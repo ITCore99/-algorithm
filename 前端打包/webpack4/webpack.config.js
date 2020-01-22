@@ -81,7 +81,7 @@ module.exports = {
             }
         ]),
         new webpack.HotModuleReplacementPlugin(),
-        new CleanWebpackPlugin(),
+        new CleanWebpackPlugin(),   //重新打包时将上次打包好的文件 先删除再生成
         new HtmlWepackPlugin({
             filename: "index.html",         //打包完后文件的名称
             template: "./src/index.html",       //定义以页面为模板

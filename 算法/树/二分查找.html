@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>二分查找</title>
 </head>
 <body>
     <script>
@@ -70,10 +70,9 @@
         function depthFirstSearch(biTree) {
             let stack = [];
             stack.push(biTree);
-            console.log("length",stack.length,stack);
             while(stack.length != 0){
                 let node = stack.pop();
-                console.log("node",node.data);
+                console.log("深度优先",node.data);
                 if(node.rightChild) {
                     stack.push(node.rightChild);
                 }
@@ -81,16 +80,31 @@
                     stack.push(node.leftChild);
                 }
             }
-            let depthStr = "";
-            console.log("stack",stack);
-            stack.forEach(item => {
-                depthStr += item.data;
-            })
-            console.log("深度优先",depthStr);
+            // let depthStr = "";
+            // console.log("stack",stack);
+            // stack.forEach(item => {
+            //     depthStr += item.data;
+            // })
+            // console.log("深度优先",depthStr);
         }
         depthFirstSearch(BiTreeCode);
-      
+        //广度优先遍历二叉树
+        function rangeFirstSearch(biTree ) {
+            let queueList = [];
+            queueList.push(biTree);
+            while(queueList.length != 0) {
+                let node = queueList.shift();
+                console.log("广度优先",node);
+                if(node.leftChild) {
+                    queueList.push(node.leftChild);
+                }
+                if(node.rightChild) {
+                    queueList.push(node.rightChild);
+                };
+            }
 
+        }
+        rangeFirstSearch(BiTreeCode)
     </script>
 </body>
 </html>

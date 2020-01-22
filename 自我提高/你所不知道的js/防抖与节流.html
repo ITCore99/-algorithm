@@ -26,7 +26,7 @@
                 if(noWTime - lastTime > wait) {        //当事件大于指定的时间时就去执行
                     fn.apply(this,arguments);
                     lastTime = noWTime;
-                } else {            //如果不大于指定的时间
+                } else {            //如果不大于指定的时间 为了保证点击最后也触发一次
                     clearTimeout(timer);        //  清除定时器
                     timer = setTimeout(() => {
                         fn.call(this,arguments);
