@@ -35,7 +35,7 @@
         // }
         // 继承父类的方法 有很多比如 使用for in循环进行遍历继承 这里我们就不进行for in的继承而是我们使用其他的方式来实现继承。
         //Tiger.prototype = Animal.prototype;     //这样子Tiger和Animal指向了同一块内存空间但Tiger加方法时Animal会受到影响
-        //现在我们对其进行改进 我们最好能实现的思路应该是这样 我们tiger实例首先应该去找自己构造函数原型的放在找不到再去找Animal类原型的方法所以我们找的路径是这样的 tiger的__prototype ==> Tiger的prototype 的__prototype__==>Animal的prototype;
+        //现在我们对其进行改进 我们最好能实现的思路应该是这样 我们tiger实例首先应该去找自己构造函数原型的方法找不到再去找Animal类原型的方法所以我们找的路径是这样的 tiger的__prototype ==> Tiger的prototype 的__prototype__==>Animal的prototype;
         //*****Tiger.prototype.__proto__= Animal.prototype;    
         //es6中美化了上面的写法改为了下面 但是地测就是上面的这种实现方式
         //*****Object.setPrototypeOf(Tiger.prototype,Animal.prototype);
