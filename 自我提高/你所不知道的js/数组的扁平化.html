@@ -44,7 +44,7 @@
            return arr.reduce((prev,current,index) => Array.isArray(current) ? prev.concat(myFlat(current)) : prev.concat(current),[]) //主要这里不能push 因为push 返回回来的是数组的长度而不是数组
        };
        //console.log(myFlat(heightArry));
-       myFlat => arr =>  arr.reduce((prev,current,index) => Array.isArray(current) ? prev.concat(myFlat(current)) : prev.concat(current),[]); 
+       var myFlat = arr =>  arr.reduce((prev,current,index) => Array.isArray(current) ? prev.concat(myFlat(current)) : prev.concat(current),[]); 
         console.log(myFlat(heightArry));
     </script>
 </body>

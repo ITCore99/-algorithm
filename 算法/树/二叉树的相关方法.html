@@ -18,7 +18,11 @@
             this.middleSearchStr = "";
             //后序遍历字符串
             this.backSearchStr = "";
-        
+            //最大值
+            maxValue = "";
+            //最小值
+            minValue = "";
+
             function Node(data) {
                 this.data = data;
                 //左子树
@@ -106,6 +110,60 @@
                 this.mapBack(node.rightChild);
                 this.backSearchStr += node.data + ",";
             }
+            //搜索二叉树的最大值
+            BinaryTree.prototype.maxValue = function() {
+                if(this.root == null) {
+                    return -1;
+                }else {
+                    this.mapMax(this.root)
+                }
+                return this.maxValue;
+            },
+            //辅助最大值函数
+            BinaryTree.prototype.mapMax = function(node) {
+                if(node == null) {
+                    return;
+                }
+                this.maxValue = node.data;
+                this.mapMax(node.rightChild);
+            }
+            //搜索二叉树的最小值
+            BinaryTree.prototype.minValue = function() {
+                if(this.root == null) {
+                    return -1;
+                }else {
+                    this.mapMin(this.root,this);
+                }
+                return this.minValue;
+            }
+            //辅助最小值
+            BinaryTree.prototype.mapMin = function(node,that) {
+                if(node == null){
+                    return;
+                };
+                that.minValue = node.data;
+                arguments.callee(node.leftChild,that); //以通过这种方式调用 this并不是Binary而是arguments
+            }
+            //搜索二叉树修改
+            BinaryTree.prototype.update = function(key,data) {
+                if(this.root == null) {
+                    return false;
+                }else {
+                   return this.mapUpdate(this.root,key,data);
+                }
+            },
+            BinaryTree.prototype.mapUpdate = function(node,key,data) {
+                if(node.data == key ) {
+                    node.data = data;
+                    return true;
+                }else if(key <= node.data) {
+                    return this.mapUpdate(node.leftChild,key,data); 
+                }else {
+                    return this.mapUpdate(node.rightChild,key,data);
+                }
+            }
+
+
         }
         //测试
         // let binaryTree = new BinaryTree();
@@ -146,6 +204,9 @@
         });
         console.log("中序遍历2===>",middleResultStr);
         console.log("后序遍历2 ==>",myBinaryTree.backSearch());
+        console.log("最大值",myBinaryTree.maxValue());
+        console.log("最小值",myBinaryTree.minValue());
+        console.log("修改",myBinaryTree.update(2,2.5));
     </script>
 </body>
 </html>
