@@ -46,6 +46,7 @@
        //console.log(myFlat(heightArry));
        var myFlat = arr =>  arr.reduce((prev,current,index) => Array.isArray(current) ? prev.concat(myFlat(current)) : prev.concat(current),[]); 
         console.log(myFlat(heightArry));
+        
     </script>
 </body>
 </html>
