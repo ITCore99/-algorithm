@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实现对象的深浅拷贝</title>
+</head>
+<body>
+    <script>
+        function clone(obj) {
+            if(obj === null || !obj) {
+                return null;
+            }
+            if(obj.constructor === Date) {
+                return new Date(obj);
+            }
+            if(obj.constructor === RegExp) {
+                return new RegExp(obj);
+            }
+            //注意这里是经典之比 这样会完全的创建一个和传进来对象一摸一样的对象
+            let newObj = new obj.constructor();
+            for(var key in obj) {
+                newObj[key] = typeof obj[key] === 'object' ?  clone(obj[key]) : obj[key]; 
+            }
+            return newObj;
+        }
+
+
+        
+        //进行测试 
+        let obj = {
+            name: "付卓宁",
+            age: 23,
+            friends: ["小明","小虎","小牛"],
+            skills: {
+                html: true,
+                css: true,
+                js: true,
+                frame:["vue","react","jquery"]
+            }
+        }
+        let newObj = clone(obj);
+        newObj.name = "付卓宁22",
+        newObj.friends.push("小贤");
+        newObj.skills.html = false;
+        newObj.skills.frame.push("小程序");
+        console.log("xxxOld", obj);
+        console.log("xxxNew", newObj);
+    </script>
+</body>
+</html>
