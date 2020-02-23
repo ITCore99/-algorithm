@@ -104,7 +104,6 @@ function Uploadfile(config) {
           formData.append("elementId",sessionStorage.getItem("elementId") ? sessionStorage.getItem("elementId") >> 0 : 0);
           this.formDataList.push(formData);
         });
-        // checkCb("文件校验完毕,md5：" + this.md5);
         checkCb("文件校验完毕");
         this.checkMd5();
       }
@@ -112,6 +111,7 @@ function Uploadfile(config) {
     this.fileReader.onerror = function() {
       checkCb("读取文件出错,清重试!");
     };
+    //注意这是同步代码会线程会先走这个进行分取第一片
     this.loadNext();
   };
   //校验文件md5
@@ -119,7 +119,7 @@ function Uploadfile(config) {
     //开始校验MD5值,向服务器发送请求，服务器返回已上传文件列表
     let formData = new FormData();
     formData.append("md5", this.md5);
-    formData.append("filename", this.filename);
+    formData.append("filename", this.file.name);
     formData.append("totalSize", this.file.size);
     formData.append("totalChunks", this.chunks);
     formData.append("chunkSize", this.chunkSize);
