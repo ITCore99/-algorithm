@@ -35,13 +35,13 @@ module.exports = {
     }, 
     devServer: {                //开发服务器 让其不要打包成实体文件而是在内存中打包 
         contentBase:"./build", //就是以build目录起一个服务访问时会先访访问文件内存中找不到再找build目录下面 
-        port: 1024,
+        port: 1025,
         compress: true,     //服务器压缩
         open: true,      //打包完之后自动的弹出浏览器
         hot: true
     },
     module : {      //webpack 加载器
-        rules:[     //从右往左写
+        rules: [     //从右往左写
             {
                 test:/\.css$/,
                 use:CssExtract.extract({
@@ -80,7 +80,7 @@ module.exports = {
                 to: 'public'
             }
         ]),
-        new webpack.HotModuleReplacementPlugin(),
+        new webpack.HotModuleReplacementPlugin (),
         new CleanWebpackPlugin(),   //重新打包时将上次打包好的文件 先删除再生成
         new HtmlWepackPlugin({
             filename: "index.html",         //打包完后文件的名称

@@ -3,11 +3,12 @@ const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const copyWebpackPlugin = require("copy-webpack-plugin");
+const webpack = require("webpack")
 module.exports = {
     mode: "development",
     entry: "./src/main.js",
     output: {
-        filename: "bundle.[hash:8].js",
+        filename: "bundle.[thunkHash].js",
         path: path.resolve(__dirname,"../dist"),
         //publicPath:'dist/'      //会在所有的url前面拼接上 由于解决在未打包html之前解决图片路径问题
     },
@@ -51,7 +52,7 @@ module.exports = {
                   {
                     loader: 'url-loader',
                     options: {
-                      limit: 9000,
+                      limit: 600,
                       name:"img/[name].[hash:8].[ext]"
                     }
                   }
@@ -77,8 +78,14 @@ module.exports = {
         }
     },
     plugins: [
+        new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.HashedModuleIdsPlugin(),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            axios: 'axios'
+        }),
         new VueLoaderPlugin(),
-        new CleanWebpackPlugin(["./dist"]),
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             title: "创建自己的webpack项目",
             template: "./index.html",
